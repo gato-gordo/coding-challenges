@@ -15,21 +15,33 @@ function rotatedArraySearch (rotated, target) {
                 },
       mid     = calcMid(),
       bisect  = function(){
-        					if(target > rotated[mid]) {
-          					target < rotated[end] ? 
-          						start = mid : end = mid
-        					} else { //target < rotated[mid]
-          					target > rotated[start] ?
-          						end = mid : start = mid
-        					}
-        					mid = calcMid()
-      					} 
-  while(start < end){
+                  if( target >  rotated[mid] ) {
+                    if(target < rotated[end] || target > rotated[start]){
+                      start = mid + 1;
+                    } else {
+                      end = mid - 1;
+                    }
+                  }
+                  if ( target < rotated[mid] ){
+                    if(target > rotated[start] || target < rotated[end]) {
+                      end = mid - 1;
+                    } else {
+                      start = mid + 1;
+                    }
+                  }
+                }
+  while(start <= end){
     if (target === rotated[mid]) break
     bisect()
+    mid = calcMid()
   }
   return target === rotated[mid] ? mid : -1
 }
 
-console.log(rotatedArraySearch([ 4, 5, 6, 0, 1, 2, 3 ], 100));
-console.log(rotatedArraySearch([ 4, 5, 6, 0, 1, 2, 3 ], 1));
+//start 0, end = 6, mid 3
+//start 0, end = 2, mid 1
+//45123
+//console.log(rotatedArraySearch([ 4, 5, 6, 0, 1, 2, 3 ], 100));
+//console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2));
+console.log(rotatedArraySearch([3, 4, 5, 6, 7, 1, 2], 3));
+//console.log(rotatedArraySearch([0, 1, 2], 2));
