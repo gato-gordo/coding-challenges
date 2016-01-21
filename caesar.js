@@ -55,23 +55,20 @@ command:
 
 
 function cipher (alpha, offset, message, command) {
-  if(command === "decode") offset = -offset;
-  var chars = alpha.split('');
+  if(command === "decode") {
+    offset = (alpha.length - offset) % alpha.length;
+  }
   var newMessage = '';
   for(var i = 0; i < message.length; i++){
-    var ch = message[i];
-    var alphaIndex = chars.indexOf(ch);
+    var alphaIndex = alpha.indexOf(message[i]);
     if(alphaIndex !== -1){
-        var newIndex = alphaIndex + offset;
-        console.log(newIndex);
-        if(newIndex > alpha.length - 1) newIndex = newIndex % alpha.length; 
-        if(newIndex < 0) newIndex = alpha.length + offset;
-        console.log(newIndex);
+        var newIndex = (alphaIndex + offset) % alpha.length;
         newMessage +=  alpha[newIndex];
     } else {
-        newMessage +=ch;
+        newMessage += message[i];
     }
   }
   return newMessage;
 }
+
 cipher("abcde", 4, "bbc", "encode");
