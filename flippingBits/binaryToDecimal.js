@@ -27,15 +27,9 @@ n:
 */
 
 function binaryToDecimal (n) {
-  var binary = 0, place = 0;
-  while(n.length){
-    if(charToBit(n.slice(n.length - 1))){
-      binary += Math.pow(2, place);
-    }
-    place++, n = n.slice(0, n.length - 1);
+  var decimal = 0;
+  for(var i = n.length - 1, e = 0; i >= 0; i--, e++){
+    if(n[i] === '1') decimal += Math.pow(2, e);
   }
-  return binary;
-}
-function charToBit(char){
-  return char === '1' ? 1 : 0;
+  return decimal;
 }
