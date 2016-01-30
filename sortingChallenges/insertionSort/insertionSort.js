@@ -4,12 +4,13 @@ Insertion sort is a basic sorting algorithm. Insertion sort iterates over an arr
 */
 
 function insertionSort (arr) {
-  var sortUpTo  = 0
+  "use strict";
+  var sortUpTo = 0;
   while(++sortUpTo < arr.length){
-    for(var i = 0; i < sortUpTo; i++){
-      if(arr[sortUpTo] < arr[i]) 
-        arr.splice(i, 0, arr.splice(sortUpTo, 1)[0]); break
-    }
-  }
-  return arr
+    for(let i = 0; i < sortUpTo; i++){
+      if(arr[sortUpTo] < arr[i]){
+        arr.splice(i, 0, arr.splice(sortUpTo, 1)[0]);
+        break;
+  } } }
+  return arr;
 }
